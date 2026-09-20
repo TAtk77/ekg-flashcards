@@ -1,11 +1,11 @@
 filename,category,rhythm,details
 011.png,,Sinus Bradycardia,
-012.png,,Sinus Bradycardia,PVC(s)
-013.png,,Sinus Rhythm,PVC(s)
-014.png,,Sinus Rhythm,Ventricular Bigeminy
-015.png,,Sinus Rhythm,Ventricular Trigeminy
-016.png,,Sinus Rhythm,Ventricular Trigeminy
-017.png,,Sinus Rhythm,Ventricular Bigeminy
+012.png,,PVC(s),Sinus Bradycardia
+013.png,,PVC(s),Sinus Rhythm
+014.png,,Ventricular Bigeminy,Sinus Rhythm
+015.png,,Ventricular Trigeminy,Sinus Rhythm
+016.png,,Ventricular Trigeminy,Sinus Rhythm
+017.png,,Ventricular Bigeminy,Sinus Rhythm
 018.png,,PSVT,Sinus Rhythm
 019.png,,SV Triplet,Sinus Rhythm
 020.png,,PSVT,Sinus Rhythm
@@ -15,7 +15,27 @@ filename,category,rhythm,details
 024.png,,Ventricular Couplet,Sinus Rhythm
 025.png,,Ventricular Couplet,Sinus Rhythm
 026.png,,VT  8 Beats,Sinus Rhythm
-027.png,,Sinus Rhythm,VT  7 Beats
-028.png,,Sinus Rhythm,SV Couplet
-029.png,,Sinus Rhythm,SV Couplet
-030.png,,Sinus Rhythm,SV Couplet
+027.png,,VT  7 Beats,Sinus Rhythm
+028.png,,SV Couplet,Sinus Rhythm
+029.png,,SV Couplet,Sinus Rhythm
+030.png,,SV Couplet,Sinus Rhythm
+241.png,,Atrial Flutter,HR: 40-50 BPM
+242.png,,Atrial Fibrillation,HR: 60-70-BPM
+243.png,,Atrial Fibrillation,HR: 90 BPM
+244.png,,Atrial Fibrillation,HR: 102 bpm
+245.png,,Atrial Fibrillation,
+246.png,,Atrial Fibrillation,
+247.png,,Atrial Fibrillation,
+248.png,,Atrial Fibrillation,
+249.png,,Atrial Fibrillation,
+250.png,,Atrial Fibrillation,
+251.png,,Sinus Rhythm,
+252.png,,Sinus Tachycardia,
+253.png,,Sinus Tachycardia,
+254.png,,Sinus Rhythm,
+255.png,,Sinus Rhythm,
+256.png,,Sinus Rhythm,
+257.png,,Atrial Fibrillation,
+258.png,,Atrial Fibrillation,
+259.png,,Atrial Fibrillation,
+260.png,,Atrial Fibrillation,
