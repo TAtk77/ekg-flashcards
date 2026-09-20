@@ -1,7 +1,17 @@
 filename,category,rhythm,details
-011.png,,Sinus Bradycardia,
-012.png,,PVC(s),Sinus Bradycardia
-013.png,,PVC(s),Sinus Rhythm
+001.png,,Sinus Rhythm,PVC(s)
+002.png,,Sinus Tachycardia,HR: 113 bpm
+003.png,,Ventricular Tachycardia,9 Beats
+004.png,,Sinus Rhythm,PAC(s)
+005.png,,Sinus Bradycardia,PAC(s)
+006.png,,Sinus Tachycardia,HR: 103 bpm
+007.png,,Sinus Tachycardia,HR: 145 bpm
+008.png,,Sinus Rhythm w/ IVCD,HR: 95 bpm
+009.png,,Sinus Rhythm,PAC(s)
+010.png,,Sinus Bradycardia,HR: 43 bpm
+011.png,,Sinus Bradycardia,HR: 51 bpm
+012.png,,Sinus Bradycardia,PVC(s)
+013.png,,Sinus Rhythm,PVC(s)
 014.png,,Ventricular Bigeminy,Sinus Rhythm
 015.png,,Ventricular Trigeminy,Sinus Rhythm
 016.png,,Ventricular Trigeminy,Sinus Rhythm
@@ -19,23 +29,23 @@ filename,category,rhythm,details
 028.png,,SV Couplet,Sinus Rhythm
 029.png,,SV Couplet,Sinus Rhythm
 030.png,,SV Couplet,Sinus Rhythm
-241.png,,Atrial Flutter,HR: 40-50 BPM
-242.png,,Atrial Fibrillation,HR: 60-70-BPM
-243.png,,Atrial Fibrillation,HR: 90 BPM
-244.png,,Atrial Fibrillation,HR: 102 bpm
-245.png,,Atrial Fibrillation,
-246.png,,Atrial Fibrillation,
-247.png,,Atrial Fibrillation,
-248.png,,Atrial Fibrillation,
-249.png,,Atrial Fibrillation,
-250.png,,Atrial Fibrillation,
-251.png,,Sinus Rhythm,
-252.png,,Sinus Tachycardia,
-253.png,,Sinus Tachycardia,
-254.png,,Sinus Rhythm,
-255.png,,Sinus Rhythm,
-256.png,,Sinus Rhythm,
-257.png,,Atrial Fibrillation,
-258.png,,Atrial Fibrillation,
-259.png,,Atrial Fibrillation,
-260.png,,Atrial Fibrillation,
+031.png,,SV Couplet,Sinus Rhythm
+032.png,,PVC(s),Sinus Rhythm
+033.png,,Atrial Fibrillation,HR: 78 bpm
+034.png,,Atrial Fibrillation,HR: 84 bpm
+035.png,,Atrial Fibrillation,HR 76 bpm
+036.png,,Sinus Rhythm w/ IVCD,HR: 84 bpm
+037.png,,Sinus Tachycardia w/ IVCD,HR: 122 bpm
+038.png,,VT 12 Beats,Sinus Rhythm
+039.png,,Ventricular Triplet,Sinus Rhythm
+040.png,,PSVT,Sinus Rhythm
+041.png,,SV Couplet,Sinus Rhythm
+042.png,,PSVT,Sinus Rhythm
+043.png,,Sinus Rhythm w/ IVCD,HR : 73 bpm
+044.png,,Ventricular Trigeminy,Sinus Rhythm
+045.png,,Ventricular Trigeminy,Sinus Rhythm
+046.png,,Ventricular Couplet,Sinus Rhythm
+047.png,,PAC(s),Sinus Bradycardia
+139.png,,PSVT,Sinus Rhythm
+140.png,,PSVT,Sinus Rhythm
+141.png,,PSVT,Sinus Rhythm
