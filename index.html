@@ -87,24 +87,20 @@
   .pill.active{background:var(--navy);border-color:var(--navy);color:#fff;}
   [data-theme="dark"] .pill.active{background:var(--accent);border-color:var(--accent);}
 
-  .card-stage{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:16px;}
-  .nav-btn{
-    background:var(--panel-bg);border:1px solid var(--border);color:var(--navy);
-    width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;flex-shrink:0;
-    box-shadow:var(--shadow);
-    transition:transform .15s,opacity .15s;
+  .list-hint{
+    text-align:center;font-size:.95rem;font-weight:700;color:var(--navy);
+    margin-bottom:16px;font-family:'Barlow Condensed';
   }
-  [data-theme="dark"] .nav-btn{color:var(--steel-light);}
-  .nav-btn:hover{transform:scale(1.06);}
-  .nav-btn:disabled{opacity:.35;cursor:default;transform:none;}
+  [data-theme="dark"] .list-hint{color:#fff;}
 
-  .flashcard{width:100%;max-width:560px;height:340px;perspective:1600px;cursor:pointer;flex-shrink:1;}
+  .card-list{display:flex;flex-direction:column;align-items:center;gap:22px;}
+
+  .flashcard{width:100%;max-width:640px;height:200px;perspective:1600px;cursor:pointer;flex-shrink:0;}
   .card-inner{
     position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.3,.7,.4,1);
     transform-style:preserve-3d;
   }
   .flashcard.flipped .card-inner{transform:rotateY(180deg);}
-  .flashcard.no-anim .card-inner{transition:none;}
   .card-face{
     position:absolute;inset:0;backface-visibility:hidden;
     border-radius:16px;background:var(--card-bg);box-shadow:var(--shadow);
@@ -113,21 +109,21 @@
   }
   .card-back{
     transform:rotateY(180deg);align-items:center;justify-content:center;
-    padding:26px 30px;text-align:center;
+    padding:20px 24px;text-align:center;
   }
 
   .strip-wrap{flex:1;display:flex;align-items:center;justify-content:center;background:var(--strip-bg);}
   .strip-wrap svg{width:100%;height:100%;display:block;}
   .strip-wrap img{width:100%;height:100%;object-fit:contain;background:var(--strip-bg);}
-  .flip-hint{
-    text-align:center;font-size:.72rem;color:var(--text-dim);padding:8px;
+  .card-number{
+    text-align:center;font-size:.72rem;color:var(--text-dim);padding:6px;
     border-top:1px solid var(--border);font-family:'Lato';
   }
 
-  .rhythm-name{font-size:1.9rem;font-weight:700;color:var(--navy);line-height:1.2;}
+  .rhythm-name{font-size:1.5rem;font-weight:700;color:var(--navy);line-height:1.2;}
   [data-theme="dark"] .rhythm-name{color:#fff;}
   .rhythm-details{
-    font-size:1.1rem;font-weight:600;color:var(--accent);margin-top:10px;font-family:'Lato';
+    font-size:1rem;font-weight:600;color:var(--accent);margin-top:8px;font-family:'Lato';
   }
 
   .controls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
@@ -137,9 +133,6 @@
     transition:transform .15s;
   }
   .controls button:hover{transform:translateY(-1px);}
-  #flipBtn{background:var(--navy);color:#fff;border-color:var(--navy);}
-  [data-theme="dark"] #flipBtn{background:var(--accent);border-color:var(--accent);}
-  #counter{font-family:'Barlow Condensed';font-size:1rem;color:var(--text-dim);font-weight:600;min-width:110px;text-align:center;}
 
   .footer-note{text-align:center;color:var(--text-dim);font-size:.76rem;margin-top:22px;}
   .load-msg{text-align:center;color:var(--text-dim);font-size:.85rem;padding:40px 0;}
@@ -166,9 +159,8 @@
   [data-theme="dark"] .btn-primary{background:var(--accent);}
 
   @media (max-width:520px){
-    .flashcard{height:300px;}
-    .nav-btn{width:38px;height:38px;font-size:1.2rem;}
-    .rhythm-name{font-size:1.5rem;}
+    .flashcard{height:170px;}
+    .rhythm-name{font-size:1.25rem;}
   }
 </style>
 </head>
@@ -191,29 +183,14 @@
   <div id="loadMsg" class="load-msg">Loading deck…</div>
 
   <div id="deckArea" style="display:none;">
-    <div class="card-stage">
-      <button class="nav-btn" id="prevBtn">&#8249;</button>
-      <div class="flashcard" id="flashcard">
-        <div class="card-inner">
-          <div class="card-face card-front">
-            <div class="strip-wrap" id="stripWrap"></div>
-            <div class="flip-hint">Tap card to reveal rhythm</div>
-          </div>
-          <div class="card-face card-back">
-            <div class="rhythm-name" id="rhythmName">Rhythm Name</div>
-            <div class="rhythm-details" id="rhythmDetails"></div>
-          </div>
-        </div>
-      </div>
-      <button class="nav-btn" id="nextBtn">&#8250;</button>
-    </div>
-
-    <div class="controls">
-      <span id="counter">Card 1 of 25</span>
+    <div class="controls" style="margin-bottom:14px;">
       <button id="shuffleBtn">🔀 Shuffle</button>
-      <button id="flipBtn">Flip Card</button>
       <button id="newSessionBtn">New Session</button>
     </div>
+
+    <div class="list-hint">Click or tap a card to see the answer</div>
+
+    <div class="card-list" id="cardList"></div>
   </div>
 
   <div class="footer-note">Strips without a matching image in /images still fall back to a generated placeholder.</div>
@@ -248,8 +225,6 @@ const IMAGES_PATH = "images/";
 let fullDeck = [];
 let deck = [];
 let filtered = [];
-let idx = 0;
-let flipped = false;
 let categories = ["All"];
 let activeCat = "All";
 
@@ -426,11 +401,7 @@ async function loadDeck(){
 }
 
 /* ---------- Rendering ---------- */
-const flashcard = document.getElementById('flashcard');
-const stripWrap = document.getElementById('stripWrap');
-const rhythmName = document.getElementById('rhythmName');
-const rhythmDetails = document.getElementById('rhythmDetails');
-const counter = document.getElementById('counter');
+const cardList = document.getElementById('cardList');
 const filterBar = document.getElementById('filterBar');
 
 function renderFilters(){
@@ -447,45 +418,42 @@ function renderFilters(){
 function applyFilter(){
   filtered = activeCat==="All" ? [...deck] : deck.filter(c=>c.cat===activeCat);
   if(filtered.length===0){ filtered = [...deck]; }
-  idx = 0;
   renderFilters();
-  renderCard();
+  renderList();
 }
 
-function renderCard(){
-  const card = filtered[idx];
-  if(!card) return;
-  flipped = false;
-  flashcard.classList.add('no-anim');
-  flashcard.classList.remove('flipped');
+function renderList(){
+  cardList.innerHTML = "";
+  filtered.forEach((card, i)=>{
+    const imgSrc = IMAGES_PATH + card.filename;
+    const fallback = waveDefaults[card.name] || {type:"normal", bpm:75};
 
-  const imgSrc = IMAGES_PATH + card.filename;
-  const fallback = waveDefaults[card.name] || {type:"normal", bpm:75};
-  stripWrap.innerHTML = `<img src="${imgSrc}" alt="${card.name} strip" onerror="this.onerror=null;this.parentNode.innerHTML=window.__waveFallback(${JSON.stringify(fallback.type)},${fallback.bpm});">`;
-
-  rhythmName.textContent = card.name;
-  rhythmDetails.textContent = card.details || "";
-
-  counter.textContent = `Card ${idx+1} of ${filtered.length}`;
-  document.getElementById('prevBtn').disabled = idx===0;
-  document.getElementById('nextBtn').disabled = idx===filtered.length-1;
-
-  // force layout so the "no-anim" snap applies, then re-enable animation
-  // for the next deliberate flip
-  void flashcard.offsetWidth;
-  flashcard.classList.remove('no-anim');
+    const el = document.createElement('div');
+    el.className = 'flashcard';
+    el.innerHTML = `
+      <div class="card-inner">
+        <div class="card-face card-front">
+          <div class="strip-wrap">
+            <img src="${imgSrc}" alt="${card.name} strip" onerror="this.onerror=null;this.parentNode.innerHTML=window.__waveFallback(${JSON.stringify(fallback.type)},${fallback.bpm});">
+          </div>
+          <div class="card-number">${i+1}</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="rhythm-name">${card.name}</div>
+          <div class="rhythm-details">${card.details || ""}</div>
+        </div>
+      </div>
+    `;
+    el.onclick = ()=> el.classList.toggle('flipped');
+    cardList.appendChild(el);
+  });
 }
 window.__waveFallback = (type,bpm) => buildWave(type,bpm);
 
 /* ---------- Controls ---------- */
-document.getElementById('prevBtn').onclick = ()=>{ if(idx>0){ idx--; renderCard(); } };
-document.getElementById('nextBtn').onclick = ()=>{ if(idx<filtered.length-1){ idx++; renderCard(); } };
-document.getElementById('flipBtn').onclick = ()=>{ flipped=!flipped; flashcard.classList.toggle('flipped',flipped); };
-flashcard.onclick = ()=>{ flipped=!flipped; flashcard.classList.toggle('flipped',flipped); };
 document.getElementById('shuffleBtn').onclick = ()=>{
   shuffleArray(filtered);
-  idx = 0;
-  renderCard();
+  renderList();
 };
 
 function shuffleArray(arr){
